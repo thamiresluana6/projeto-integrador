@@ -5,20 +5,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
+@Entity
 @Table(name ="endereco" )
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "logradouro")
     private String logradouro;
+    @Column(name = "numeroCasa")
     private String numeroCasa;
+    @Column(name = "referencia")
     private String referencia;
+
 }
