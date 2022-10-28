@@ -15,12 +15,11 @@ import javax.persistence.*;
 public class Taxa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
     @Column(name = "nome")
     private String nome;
     @Column(name = "porcentagem")
     private Double porcentagem;
 
-    }
+
+}
 

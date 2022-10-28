@@ -13,6 +13,7 @@ import java.util.Date;
 @Builder
 @Data
 @Table(name = "carteira")
+
 public class Carteira {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +27,5 @@ public class Carteira {
     private Date dataInicioInvestimento;
     @Column(name = "getDataTerminoInvestimento")
     private Date getDataTerminoInvestimento;
-
-
-
 
 }

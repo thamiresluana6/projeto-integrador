@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @AllArgsConstructor
+@Entity
 @NoArgsConstructor
 @Builder
 @Data
@@ -20,10 +21,6 @@ public class Pessoa {
     private Long id;
     @Column(name = "nome")
     private String nome;
-    @Column(name = "documento")
-    private Documento documento;
-    @Column(name = "endereco")
-    private Endereco endereco;
     @Column(name = "genero")
     private String genero;
     @Column(name = "idade")
@@ -34,6 +31,23 @@ public class Pessoa {
     private String estadoCivil;
     @Column(name = "dependentes")
     private String dependentes;
-    @Column(name = "carteira")
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(name = "documento_pessoa",
+            joinColumns= @JoinColumn(name = "id_documento"),
+            inverseJoinColumns = @JoinColumn(name = "id_pessoa"))
+    private Documento documento;
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(name = "pessoa_endereço",
+        joinColumns= @JoinColumn(name = "id_endereço"),
+        inverseJoinColumns = @JoinColumn(name = "id_pessoa"))
+    private Endereco endereco;
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(name = "pessoa_carteira",
+            joinColumns= @JoinColumn(name = "id_carteira"),
+            inverseJoinColumns = @JoinColumn(name = "id_pessoa"))
     private Carteira carteira;
+
 }

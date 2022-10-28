@@ -11,12 +11,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Data
+@Entity
 @Table(name ="endereco" )
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
     @Column(name = "logradouro")
     private String logradouro;
     @Column(name = "numeroCasa")
