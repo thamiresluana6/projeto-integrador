@@ -16,6 +16,8 @@ import javax.persistence.*;
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_endereço")
+    private Long id;
     @Column(name = "logradouro")
     private String logradouro;
     @Column(name = "numeroCasa")

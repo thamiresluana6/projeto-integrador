@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @AllArgsConstructor
+@Entity
 @NoArgsConstructor
 @Builder
 @Data
@@ -15,6 +16,8 @@ import javax.persistence.*;
 public class Taxa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_taxa")
+    private Long id;
     @Column(name = "nome")
     private String nome;
     @Column(name = "porcentagem")

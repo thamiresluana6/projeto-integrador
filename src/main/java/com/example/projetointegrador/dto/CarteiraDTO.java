@@ -1,17 +1,19 @@
-package dto;
+package com.example.projetointegrador.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
+
 @Data
 public class CarteiraDTO {
-        private String cpf;
-        private String cnpj;
-        private String identidade;
+    private Long id;
+    private String nome;
+    private Double saldo;
+    private LocalDate dataInicioInvestimento;
+    private LocalDate dataTerminoInvestimento;
+
     }
