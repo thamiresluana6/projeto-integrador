@@ -1,6 +1,6 @@
-package controllers;
+package com.example.projetointegrador.controllers;
 
-import dto.PessoaDTO;
+import com.example.projetointegrador.dto.PessoaDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

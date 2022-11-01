@@ -11,10 +11,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Data
+@Entity
 @Table(name = "taxa" )
 public class Taxa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_taxa")
+    private Long id;
     @Column(name = "nome")
     private String nome;
     @Column(name = "porcentagem")
