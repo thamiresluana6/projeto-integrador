@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @AllArgsConstructor
@@ -24,8 +26,8 @@ public class Carteira {
     @Column(name = "saldo")
     private Double saldo;
     @Column(name = "dataInicioInvestimento")
-    private Date dataInicioInvestimento;
-    @Column(name = "getDataTerminoInvestimento")
-    private Date getDataTerminoInvestimento;
+    private LocalDate dataInicioInvestimento;
+    @Column(name = "dataTerminoInvestimento")
+    private LocalDate dataTerminoInvestimento;
 
 }
