@@ -1,31 +1,40 @@
 package com.example.projetointegrador.controllers;
 
-
-import com.example.projetointegrador.dto.PessoaDTO;
 import com.example.projetointegrador.models.Pessoa;
-import com.example.projetointegrador.services.PessoaServicempl;
+import com.example.projetointegrador.services.PessoaServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping(value = "/api")
-@CrossOrigin
-public class PessoaController {
+import java.util.List;
 
-    final PessoaServicempl pessoaService;
 
-    public PessoaController(PessoaServicempl pessoaService) {
-        this.pessoaService = pessoaService;
-    }
-    @PostMapping(value= "/salvarPessoa")
-    public ResponseEntity<Object> salvarPessoa(@RequestBody Pessoa pessoa) {
-        pessoaService.salvarPessoa(pessoa);
-        return null;
-    }
+    @RestController
+    @RequestMapping(value = "/api")
+    @CrossOrigin
+    public class PessoaController {
 
-    @GetMapping(value = "/buscarPessoa")
-    public ResponseEntity<Object> buscarPessoa() {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(pessoaService.buscarPessoa());
+        final PessoaServiceImpl pessoaServiceImpl;
+
+        public PessoaController(PessoaServiceImpl pessoaService) {
+            this.pessoaServiceImpl = pessoaService;
+        }
+
+        @PostMapping(value = "/salvarPessoa")
+        public ResponseEntity<Object> salvarPessoa(@RequestBody Pessoa pessoa) {
+            Pessoa response = pessoaServiceImpl.salvar(pessoa);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        }
+
+        @GetMapping(value = "/buscarPessoa")
+        public ResponseEntity<Object> buscarPessoa() {
+            List<Pessoa> response = pessoaServiceImpl.listar();
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        }
+
+        @PutMapping(value = "/alterarPessoa")
+        public ResponseEntity<Object> alterarPessoa(@RequestBody Pessoa pessoa) {
+            Pessoa response = pessoaServiceImpl.editar(pessoa);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        }
     }
-}
