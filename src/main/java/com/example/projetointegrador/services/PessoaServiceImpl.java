@@ -1,5 +1,6 @@
 package com.example.projetointegrador.services;
 
+import com.example.projetointegrador.models.Carteira;
 import com.example.projetointegrador.models.Pessoa;
 import com.example.projetointegrador.repositories.PessoaRepository;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,6 @@ public class PessoaServiceImpl implements PessoaService {
     public Pessoa salvar(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
-}
+
+    }
 
