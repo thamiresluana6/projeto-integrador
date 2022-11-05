@@ -30,5 +30,9 @@ public class CarteiraServiceImpl implements CarteiraService {
         return carteiraRepository.save(carteira);
     }
 
+    @Override
+    public void deletarCarteira(Long id_carteira) {
+        carteiraRepository.deleteById(id_carteira);
+    }
 
 }

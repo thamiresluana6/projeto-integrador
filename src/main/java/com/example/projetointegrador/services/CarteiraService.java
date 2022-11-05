@@ -11,5 +11,7 @@ public interface CarteiraService {
 
         Carteira editarCarteira(Carteira carteira);
 
+        void deletarCarteira(Long id_carteira);
+
 
 }

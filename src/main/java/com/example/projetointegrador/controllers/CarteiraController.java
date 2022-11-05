@@ -26,7 +26,7 @@ public class CarteiraController {
 
     @GetMapping(value = "/buscarCarteira")
     public ResponseEntity<Object> buscarCarteira() {
-        List<Carteira> response = CarteiraServiceImpl.listarCarteira();
+        List<Carteira> response = carteiraServiceImpl.listarCarteira();
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -34,6 +34,12 @@ public class CarteiraController {
     public ResponseEntity<Object> alterarCarteira(@RequestBody Carteira carteira) {
         Carteira response = carteiraServiceImpl.editarCarteira(carteira);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @DeleteMapping(value = "/deletarCarteira")
+    public ResponseEntity<Object>deletarCarteira(Long id_carteira) {
+        carteiraServiceImpl.deletarCarteira(id_carteira);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }
