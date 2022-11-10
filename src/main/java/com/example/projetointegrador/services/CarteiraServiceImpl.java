@@ -2,6 +2,7 @@ package com.example.projetointegrador.services;
 
 import com.example.projetointegrador.models.Carteira;
 import com.example.projetointegrador.repositories.CarteiraRepository;
+import org.hibernate.sql.Select;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +27,13 @@ public class CarteiraServiceImpl implements CarteiraService {
     }
 
     @Override
-    public Carteira salvarCarteira(Carteira carteira) {
-        return carteiraRepository.save(carteira);
+    public Carteira salvarCarteira(Carteira carteira) throws Exception {
+        List<Carteira> CadastroCarteira = carteiraRepository.findAll();
+        if (carteira.getNome() != null && CadastroCarteira.get(3).getNome().equals(carteira.getNome())) {
+            throw new Exception("Nome de carteita ja existente,tente outro!");
+        }else{
+            return carteiraRepository.save(carteira);
+        }
     }
 
     @Override
@@ -35,4 +41,4 @@ public class CarteiraServiceImpl implements CarteiraService {
         carteiraRepository.deleteById(id_carteira);
     }
 
-}
+    }

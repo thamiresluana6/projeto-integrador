@@ -17,7 +17,7 @@ public class Taxa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_taxa")
-    private Long id;
+    private Long id_taxa;
     @Column(name = "nome")
     private String nome;
     @Column(name = "porcentagem")

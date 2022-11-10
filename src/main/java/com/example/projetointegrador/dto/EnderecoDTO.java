@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Data
 public class EnderecoDTO {
+    private Long id_endereco;
     private String logradouro;
     private String numeroCasa;
     private String referencia;

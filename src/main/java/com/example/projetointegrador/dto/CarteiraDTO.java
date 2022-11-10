@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Data
 public class CarteiraDTO {
-    private Long id;
+    private Long id_carteira;
     private String nome;
     private Double saldo;
     private LocalDate dataInicioInvestimento;

@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Data
 public class PessoaDTO {
 
-    private Long id;
+    private Long id_pessoa;
     private String nome;
     private Documento documento;
     private Endereco endereco;
