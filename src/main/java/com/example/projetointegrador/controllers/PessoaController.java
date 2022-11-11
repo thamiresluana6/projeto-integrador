@@ -21,7 +21,7 @@ import java.util.List;
         }
 
         @PostMapping(value = "/salvarPessoa")
-        public ResponseEntity<Object> salvarPessoa(@RequestBody Pessoa pessoa) {
+        public ResponseEntity<Object> salvarPessoa(@RequestBody Pessoa pessoa) throws Exception {
             Pessoa response = pessoaServiceImpl.salvar(pessoa);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }

@@ -28,12 +28,13 @@ public class CarteiraServiceImpl implements CarteiraService {
 
     @Override
     public Carteira salvarCarteira(Carteira carteira) throws Exception {
-        List<Carteira> CadastroCarteira = carteiraRepository.findAll();
-        if (carteira.getNome() != null && CadastroCarteira.get(3).getNome().equals(carteira.getNome())) {
-            throw new Exception("Nome de carteita ja existente,tente outro!");
-        }else{
-            return carteiraRepository.save(carteira);
+        List<Carteira> carteiraList= carteiraRepository.findAll();
+        for (Carteira carteira1: carteiraList) {
+            if (carteira.getNome().equals(carteira1.getNome())) {
+                throw new Exception("Esse nome de carteira ja existe, tente outro!");
+            }
         }
+        return carteiraRepository.save(carteira);
     }
 
     @Override

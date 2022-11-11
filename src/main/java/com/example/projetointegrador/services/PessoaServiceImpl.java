@@ -26,10 +26,21 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public Pessoa salvar(Pessoa pessoa) {
-
-        return pessoaRepository.save(pessoa);
-    }
+    public Pessoa salvar(Pessoa pessoa) throws Exception {
+        List<Pessoa> listaDePessoa = pessoaRepository.findAll();
+        for (Pessoa valorespessoa : listaDePessoa) {
+            if (pessoa.getNome().equals(valorespessoa.getNome())) {
+                throw new Exception("Esse nome já esta cadastrado, tente outro!");
+            } if (pessoa.getDocumento().getCpf().equals(valorespessoa.getDocumento().getCpf())){
+                throw new Exception("Esse cpf já esta cadastrado, tente outro!");
+            } if (pessoa.getDocumento().getIdentidade().equals(valorespessoa.getDocumento().getIdentidade())){
+                throw new Exception("Essa identidade já esta cadastrado, tente outra!");
+            } if (pessoa.getEndereco().getNumeroCasa().equals(valorespessoa.getEndereco().getNumeroCasa())){
+                throw new Exception("Esse numero já esta cadastrado, tente outro!");
+            }
+        }
+            return pessoaRepository.save(pessoa);
+        }
 
     @Override
     public void deletar(Long id_pessoa) {

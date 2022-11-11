@@ -1,6 +1,7 @@
 package com.example.projetointegrador.services;
 
 import com.example.projetointegrador.models.Documento;
+import com.example.projetointegrador.models.Pessoa;
 import com.example.projetointegrador.repositories.DocumentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,15 @@ public class DocumentoServiceImpl implements DocumentoService {
     }
 
     @Override
-    public Documento salvarDocumento(Documento documento) {
+    public Documento salvarDocumento(Documento documento) throws Exception {
+        List<Documento> listaDeDocumento = documentoRepository.findAll();
+        for (Documento valoresDocumento : listaDeDocumento) {
+            if (documento.getCpf().equals(valoresDocumento.getCpf())) {
+                throw new Exception("Esse cpf já esta cadastrado!");
+            } else if (documento.getIdentidade().equals(valoresDocumento.getIdentidade())) {
+                    throw new Exception("Essa identidade já esta cadastrada!");
+                }
+            }
         return documentoRepository.save(documento);
     }
 

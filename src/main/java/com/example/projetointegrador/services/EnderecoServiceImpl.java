@@ -26,7 +26,13 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
-    public Endereco salvarEndereco(Endereco endereco) {
+    public Endereco salvarEndereco(Endereco endereco) throws Exception {
+        List<Endereco> enderecoLista = enderecoRepository.findAll();
+        for (Endereco numCasa1: enderecoLista) {
+         if (endereco.getNumeroCasa().equals(numCasa1.getNumeroCasa())) {
+             throw new Exception ("Este número já esta cadastrado, tente outro!");
+         }
+        }
         return enderecoRepository.save(endereco);
     }
 

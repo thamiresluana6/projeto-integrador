@@ -7,7 +7,7 @@ import java.util.List;
 public interface CarteiraService {
         List<Carteira> listarCarteira();
 
-        Carteira salvarCarteira(Carteira carteira);
+        Carteira salvarCarteira(Carteira carteira) throws Exception;
 
         Carteira editarCarteira(Carteira carteira);
 
