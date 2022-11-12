@@ -1,7 +1,9 @@
 package com.example.projetointegrador.services;
 
 import com.example.projetointegrador.models.Pessoa;
+import com.example.projetointegrador.models.Taxa;
 import com.example.projetointegrador.repositories.PessoaRepository;
+import com.example.projetointegrador.repositories.TaxaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +13,11 @@ public class PessoaServiceImpl implements PessoaService {
 
     final PessoaRepository pessoaRepository;
 
-    public PessoaServiceImpl(PessoaRepository pessoaRepository) {
+    final TaxaRepository taxaRepository;
+
+    public PessoaServiceImpl(PessoaRepository pessoaRepository, TaxaRepository taxaRepository) {
         this.pessoaRepository = pessoaRepository;
+        this.taxaRepository = taxaRepository;
     }
 
     @Override
@@ -31,21 +36,30 @@ public class PessoaServiceImpl implements PessoaService {
         for (Pessoa valorespessoa : listaDePessoa) {
             if (pessoa.getNome().equals(valorespessoa.getNome())) {
                 throw new Exception("Esse nome já esta cadastrado, tente outro!");
-            } if (pessoa.getDocumento().getCpf().equals(valorespessoa.getDocumento().getCpf())){
+            }
+            if (pessoa.getDocumento().getCpf().equals(valorespessoa.getDocumento().getCpf())) {
                 throw new Exception("Esse cpf já esta cadastrado, tente outro!");
-            } if (pessoa.getDocumento().getIdentidade().equals(valorespessoa.getDocumento().getIdentidade())){
+            }
+            if (pessoa.getDocumento().getIdentidade().equals(valorespessoa.getDocumento().getIdentidade())) {
                 throw new Exception("Essa identidade já esta cadastrado, tente outra!");
-            } if (pessoa.getEndereco().getNumeroCasa().equals(valorespessoa.getEndereco().getNumeroCasa())){
+            }
+            if (pessoa.getEndereco().getNumeroCasa().equals(valorespessoa.getEndereco().getNumeroCasa())) {
                 throw new Exception("Esse numero já esta cadastrado, tente outro!");
             }
         }
-            return pessoaRepository.save(pessoa);
-        }
+        return pessoaRepository.save(pessoa);
+    }
 
     @Override
     public void deletar(Long id_pessoa) {
         pessoaRepository.deleteById(id_pessoa);
     }
 
+    public void adicionarTaxa() {
+        List<Pessoa> taxaList = pessoaRepository.findAll();
+        for(Pessoa pessoa2 :taxaList){}
+
     }
+
+}
 
