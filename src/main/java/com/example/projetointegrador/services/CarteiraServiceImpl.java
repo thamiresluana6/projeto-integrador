@@ -1,5 +1,6 @@
 package com.example.projetointegrador.services;
 
+import com.example.projetointegrador.exceptions.EntityNotFoundException;
 import com.example.projetointegrador.models.Carteira;
 import com.example.projetointegrador.repositories.CarteiraRepository;
 import org.hibernate.sql.Select;
@@ -31,7 +32,7 @@ public class CarteiraServiceImpl implements CarteiraService {
         List<Carteira> carteiraList= carteiraRepository.findAll();
         for (Carteira carteira1: carteiraList) {
             if (carteira.getNome().equals(carteira1.getNome())) {
-                throw new Exception("Esse nome de carteira ja existe, tente outro!");
+                throw new EntityNotFoundException("Esse nome de carteira ja existe, tente outro!");
             }
         }
         return carteiraRepository.save(carteira);
