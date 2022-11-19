@@ -1,5 +1,6 @@
 package com.example.projetointegrador.services;
 
+import com.example.projetointegrador.exceptions.EntityNotFoundException;
 import com.example.projetointegrador.models.Documento;
 import com.example.projetointegrador.models.Pessoa;
 import com.example.projetointegrador.repositories.DocumentoRepository;
@@ -31,9 +32,9 @@ public class DocumentoServiceImpl implements DocumentoService {
         List<Documento> listaDeDocumento = documentoRepository.findAll();
         for (Documento valoresDocumento : listaDeDocumento) {
             if (documento.getCpf().equals(valoresDocumento.getCpf())) {
-                throw new Exception("Esse cpf já esta cadastrado!");
+                throw new EntityNotFoundException("Esse cpf já esta cadastrado!");
             } else if (documento.getIdentidade().equals(valoresDocumento.getIdentidade())) {
-                    throw new Exception("Essa identidade já esta cadastrada!");
+                    throw new EntityNotFoundException("Essa identidade já esta cadastrada!");
                 }
             }
         return documentoRepository.save(documento);

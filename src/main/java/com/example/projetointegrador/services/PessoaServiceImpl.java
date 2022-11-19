@@ -1,7 +1,7 @@
 package com.example.projetointegrador.services;
 
+import com.example.projetointegrador.exceptions.EntityNotFoundException;
 import com.example.projetointegrador.models.Pessoa;
-import com.example.projetointegrador.models.Taxa;
 import com.example.projetointegrador.repositories.PessoaRepository;
 import com.example.projetointegrador.repositories.TaxaRepository;
 import org.springframework.stereotype.Service;
@@ -35,16 +35,16 @@ public class PessoaServiceImpl implements PessoaService {
         List<Pessoa> listaDePessoa = pessoaRepository.findAll();
         for (Pessoa valorespessoa : listaDePessoa) {
             if (pessoa.getNome().equals(valorespessoa.getNome())) {
-                throw new Exception("Esse nome já esta cadastrado, tente outro!");
+                throw new EntityNotFoundException("Esse nome já esta cadastrado, tente outro!");
             }
             if (pessoa.getDocumento().getCpf().equals(valorespessoa.getDocumento().getCpf())) {
-                throw new Exception("Esse cpf já esta cadastrado, tente outro!");
+                throw new EntityNotFoundException("Esse cpf já esta cadastrado, tente outro!");
             }
             if (pessoa.getDocumento().getIdentidade().equals(valorespessoa.getDocumento().getIdentidade())) {
-                throw new Exception("Essa identidade já esta cadastrado, tente outra!");
+                throw new EntityNotFoundException("Essa identidade já esta cadastrado, tente outra!");
             }
             if (pessoa.getEndereco().getNumeroCasa().equals(valorespessoa.getEndereco().getNumeroCasa())) {
-                throw new Exception("Esse numero já esta cadastrado, tente outro!");
+                throw new EntityNotFoundException("Esse numero já esta cadastrado, tente outro!");
             }
         }
         return pessoaRepository.save(pessoa);
@@ -55,13 +55,22 @@ public class PessoaServiceImpl implements PessoaService {
         pessoaRepository.deleteById(id_pessoa);
     }
 
+
     public void adicionarTaxa() {
         List<Pessoa> taxaList = pessoaRepository.findAll();
+<<<<<<< HEAD
         for(Pessoa pessoa2 :taxaList){
             if(pessoa2.getCarteira().getSaldo() != null && pessoa2.getTaxa() != null && pessoa2.getTaxa().getPorcentagem() !=null){
                 Double saldo= pessoa2.getCarteira().getSaldo();
                 Double juros= pessoa2.getTaxa().getPorcentagem();
                 Double rendimento= saldo + (saldo*(juros/1000));
+=======
+        for(Pessoa pessoa2 :taxaList) {
+            if(pessoa2.getCarteira().getSaldo() != null && pessoa2.getTaxa() !=null && pessoa2.getTaxa().getPorcentagem() !=null) {
+                Double saldoAtual= pessoa2.getCarteira().getSaldo();
+                Double juros = pessoa2.getTaxa().getPorcentagem();
+                Double rendimento= saldoAtual + (saldoAtual* (juros/1000));
+>>>>>>> 7f12708583808501d386b35c1328419c2ae694f5
                 pessoa2.getCarteira().setSaldo(rendimento);
                 pessoaRepository.save(pessoa2);
             }
