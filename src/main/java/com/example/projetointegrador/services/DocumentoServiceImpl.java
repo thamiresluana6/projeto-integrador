@@ -1,8 +1,8 @@
 package com.example.projetointegrador.services;
 
+import com.example.projetointegrador.dto.DocumentoDTO;
 import com.example.projetointegrador.exceptions.EntityNotFoundException;
 import com.example.projetointegrador.models.Documento;
-import com.example.projetointegrador.models.Pessoa;
 import com.example.projetointegrador.repositories.DocumentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,21 +23,31 @@ public class DocumentoServiceImpl implements DocumentoService {
     }
 
     @Override
-    public Documento editarDocumento(Documento documento) {
-        return documentoRepository.save(documento);
+    public Documento editarDocumento(DocumentoDTO documentoDTO) {
+        Documento documento1 = Documento.builder()
+                .cnpj(documentoDTO.getCnpj())
+                .cpf(documentoDTO.getCpf())
+                .identidade(documentoDTO.getIdentidade())
+                .build();
+        return documentoRepository.save(documento1);
     }
 
     @Override
-    public Documento salvarDocumento(Documento documento) throws Exception {
+    public Documento salvarDocumento(DocumentoDTO documentoDTO) throws Exception {
         List<Documento> listaDeDocumento = documentoRepository.findAll();
         for (Documento valoresDocumento : listaDeDocumento) {
-            if (documento.getCpf().equals(valoresDocumento.getCpf())) {
+            if (documentoDTO.getCpf().equals(valoresDocumento.getCpf())) {
                 throw new EntityNotFoundException("Esse cpf já esta cadastrado!");
-            } else if (documento.getIdentidade().equals(valoresDocumento.getIdentidade())) {
+            } else if (documentoDTO.getIdentidade().equals(valoresDocumento.getIdentidade())) {
                     throw new EntityNotFoundException("Essa identidade já esta cadastrada!");
                 }
             }
-        return documentoRepository.save(documento);
+        Documento documento1 = Documento.builder()
+                .cnpj(documentoDTO.getCnpj())
+                .cpf(documentoDTO.getCpf())
+                .identidade(documentoDTO.getIdentidade())
+                .build();
+        return documentoRepository.save(documento1);
     }
 
     @Override

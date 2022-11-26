@@ -1,10 +1,12 @@
 package com.example.projetointegrador.services;
 
+import com.example.projetointegrador.dto.TaxaDTO;
 import com.example.projetointegrador.exceptions.EntityNotFoundException;
 import com.example.projetointegrador.models.Taxa;
 import com.example.projetointegrador.repositories.TaxaRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -22,19 +24,29 @@ public class TaxaServiceImpl implements TaxaService {
     }
 
     @Override
-    public Taxa editarTaxa(Taxa taxa) {
-        return taxaRepository.save(taxa);
+    public Taxa editarTaxa(TaxaDTO taxaDTO) {
+        Taxa taxa2 = Taxa.builder()
+                .nome(taxaDTO.getNome())
+                .porcentagem(taxaDTO.getPorcentagem() != null ? taxaDTO.getPorcentagem() : null)
+                .build();
+        return taxaRepository.save(taxa2);
     }
 
     @Override
-    public Taxa salvarTaxa(Taxa taxa) throws Exception {
+    public Taxa salvarTaxa(TaxaDTO taxaDTO) throws Exception {
         List <Taxa> taxaLista = taxaRepository.findAll();
         for (Taxa nomeTaxa1: taxaLista) {
-            if (taxa.getNome().equals(nomeTaxa1.getNome()));{
+
+            if (taxaDTO.getNome().equals(nomeTaxa1.getNome()));{
                 throw new EntityNotFoundException("Esse nome de taxa ja está cadastrado,tente outro!");
             }
         }
-        return taxaRepository.save(taxa);
+                Taxa taxa1 = Taxa.builder()
+                        .nome(taxaDTO.getNome())
+                        .porcentagem(taxaDTO.getPorcentagem() != null ? taxaDTO.getPorcentagem() : null)
+                        .build();
+
+        return taxaRepository.save(taxa1);
     }
 
     @Override

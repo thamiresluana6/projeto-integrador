@@ -1,6 +1,7 @@
 package com.example.projetointegrador.controllers;
 
 
+import com.example.projetointegrador.dto.EnderecoDTO;
 import com.example.projetointegrador.models.Endereco;
 import com.example.projetointegrador.services.EnderecoServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,8 @@ public class EnderecoController {
     }
 
     @PostMapping(value = "/salvarEndereco")
-    public ResponseEntity<Object> salvarEndereco(@RequestBody Endereco endereco) throws Exception {
-        Endereco response = enderecoServiceImpl.salvarEndereco(endereco);
+    public ResponseEntity<Object> salvarEndereco(@RequestBody EnderecoDTO enderecoDTO) throws Exception {
+        Endereco response = enderecoServiceImpl.salvarEndereco(enderecoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -33,8 +34,8 @@ public class EnderecoController {
     }
 
     @PutMapping(value = "/alterarEndereco")
-    public ResponseEntity<Object> alterarEndereco(@RequestBody Endereco endereco) {
-        Endereco response = enderecoServiceImpl.editarEndereco(endereco);
+    public ResponseEntity<Object> alterarEndereco(@RequestBody EnderecoDTO enderecoDTO) {
+        Endereco response = enderecoServiceImpl.editarEndereco(enderecoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

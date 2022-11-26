@@ -1,5 +1,6 @@
 package com.example.projetointegrador.services;
 
+import com.example.projetointegrador.dto.CarteiraDTO;
 import com.example.projetointegrador.exceptions.EntityNotFoundException;
 import com.example.projetointegrador.models.Carteira;
 import com.example.projetointegrador.repositories.CarteiraRepository;
@@ -23,19 +24,31 @@ public class CarteiraServiceImpl implements CarteiraService {
     }
 
     @Override
-    public Carteira editarCarteira(Carteira carteira) {
-        return carteiraRepository.save(carteira);
+    public Carteira editarCarteira(CarteiraDTO carteiraDTO) {
+        Carteira carteira2 = Carteira.builder()
+                .nome(carteiraDTO.getNome())
+                .saldo(carteiraDTO.getSaldo())
+                .dataInicioInvestimento(carteiraDTO.getDataInicioInvestimento())
+                .dataTerminoInvestimento(carteiraDTO.getDataTerminoInvestimento())
+                .build();
+        return carteiraRepository.save(carteira2);
     }
 
     @Override
-    public Carteira salvarCarteira(Carteira carteira) throws Exception {
+    public Carteira salvarCarteira(CarteiraDTO carteiraDTO) throws Exception {
         List<Carteira> carteiraList= carteiraRepository.findAll();
         for (Carteira carteira1: carteiraList) {
-            if (carteira.getNome().equals(carteira1.getNome())) {
+            if (carteiraDTO.getNome().equals(carteira1.getNome())) {
                 throw new EntityNotFoundException("Esse nome de carteira ja existe, tente outro!");
             }
         }
-        return carteiraRepository.save(carteira);
+        Carteira carteira1 = Carteira.builder()
+                .nome(carteiraDTO.getNome())
+                .saldo(carteiraDTO.getSaldo())
+                .dataInicioInvestimento(carteiraDTO.getDataInicioInvestimento())
+                .dataTerminoInvestimento(carteiraDTO.getDataTerminoInvestimento())
+                .build();
+        return carteiraRepository.save(carteira1);
     }
 
     @Override
